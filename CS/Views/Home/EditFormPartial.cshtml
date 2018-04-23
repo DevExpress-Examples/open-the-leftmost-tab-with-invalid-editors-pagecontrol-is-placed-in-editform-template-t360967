@@ -1,0 +1,50 @@
+@model Product
+
+@Html.DevExpress().PageControl(settings => {
+    settings.Name = "PageControl";
+
+    settings.TabPages.Add("Product Name").SetContent(() => {
+        Html.DevExpress().Label(s => {
+            s.AssociatedControlName = "ProductName";
+            s.Text = "Product Name:";
+        }).GetHtml();
+        Html.DevExpress().TextBoxFor(m => m.ProductName, s => {
+            s.ShowModelErrors = true;
+            s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithText;
+            s.CustomJSProperties += (sender, ea) => ea.Properties["cpTabIndex"] = 0;
+        }).GetHtml();
+    });
+    settings.TabPages.Add("Unit Price").SetContent(() => {
+        Html.DevExpress().Label(s => {
+            s.AssociatedControlName = "UnitPrice";
+            s.Text = "Unit Price:";
+        }).GetHtml();
+        Html.DevExpress().TextBoxFor(m => m.UnitPrice, s => {
+            s.ShowModelErrors = true;
+            s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithText;
+            s.CustomJSProperties += (sender, ea) => ea.Properties["cpTabIndex"] = 1;
+        }).GetHtml();
+    });
+    settings.TabPages.Add("Units On Order").SetContent(() => {
+        Html.DevExpress().Label(s => {
+            s.AssociatedControlName = "UnitsOnOrder";
+            s.Text = "Units On Order:";
+        }).GetHtml();
+        Html.DevExpress().TextBoxFor(m => m.UnitsOnOrder, s => {
+            s.ShowModelErrors = true;
+            s.Properties.ValidationSettings.ErrorDisplayMode = ErrorDisplayMode.ImageWithText;
+            s.CustomJSProperties += (sender, ea) => ea.Properties["cpTabIndex"] = 2;
+        }).GetHtml();
+    });
+}).GetHtml()
+
+@Html.DevExpress().HyperLink(s => {
+    s.Name = "Update";
+    s.Properties.Text = "Update";
+    s.NavigateUrl = "javascript:UpdateGridView();";
+}).GetHtml()
+@Html.DevExpress().HyperLink(s => {
+    s.Name = "Cancel";
+    s.Properties.Text = "Cancel";
+    s.NavigateUrl = "javascript:GridView.CancelEdit();";
+}).GetHtml()
